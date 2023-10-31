@@ -21,9 +21,11 @@
     <section class="container">
       <h2>Timer</h2>
       <div class="face">
-        <input type="text" value="00:10">
+        <input type="number" class="hide-spinners" value="00" maxlength="2"><span>m</span>
+        <input type="number" class="hide-spinners" value="30" maxlength="2"><span>s</span>
       </div>
       <div class="controls">
+        <button disabled>RESET</button>
         <button>START</button>
       </div>
     </section>

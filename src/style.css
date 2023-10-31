@@ -38,6 +38,18 @@ h6 {
   isolation: isolate;
 }
 
+.hide-spinners::-webkit-inner-spin-button,
+.hide-spinners::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.hide-spinners::-moz-inner-spin-button,
+.hide-spinners::-moz-outer-spin-button {
+  -moz-appearance: none;
+  margin: 0;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: midnightblue;
@@ -69,11 +81,20 @@ body {
 
 .face input {
   padding: 0;
-  margin: 0;
-  max-width: 250px;
+  margin: 0 3px;
+  width: 3.8rem;
   background: none;
-  outline: 0;
   border: 0;
+  border-radius: 5px;
+  outline: 1px solid rgba(240, 248, 255, 0.243);
   color: aliceblue;
   text-align: center;
+}
+
+.face input:read-only {
+  outline: 0;
+}
+
+.face input:focus {
+  outline: 1px solid rgba(240, 248, 255, 0.243);
 }
