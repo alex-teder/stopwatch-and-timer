@@ -1,5 +1,6 @@
 import "./style.css";
 import { Stopwatch, StopwatchFace } from "./Stopwatch";
+import { Timer, TimerFace } from "./Timer";
 
 // -------- STOPWATCH --------
 const swStartStopBtn = document.querySelector("#sw-startstop") as HTMLButtonElement;
@@ -25,3 +26,12 @@ swResetBtn.addEventListener("click", () => {
   sw.reset();
   swf.updateOnce();
 });
+
+// --------- TIMER ---------
+const minField = document.querySelector("#min-field") as HTMLInputElement;
+const secField = document.querySelector("#sec-field") as HTMLInputElement;
+const timerStartStopBtn = document.querySelector("#timer-startstop") as HTMLButtonElement;
+
+const t = new Timer();
+const tf = new TimerFace(t);
+tf.mount(minField, secField, timerStartStopBtn);
