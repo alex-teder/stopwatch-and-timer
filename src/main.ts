@@ -3,29 +3,13 @@ import { Stopwatch, StopwatchFace } from "./Stopwatch";
 import { Timer, TimerFace } from "./Timer";
 
 // -------- STOPWATCH --------
-const swStartStopBtn = document.querySelector("#sw-startstop") as HTMLButtonElement;
+const swFace = document.querySelector("#sw-face") as HTMLElement;
 const swResetBtn = document.querySelector("#sw-reset") as HTMLButtonElement;
+const swStartStopBtn = document.querySelector("#sw-startstop") as HTMLButtonElement;
 
 const sw = new Stopwatch();
 const swf = new StopwatchFace(sw);
-swf.mount(document.querySelector("#sw-face")!);
-
-swStartStopBtn.addEventListener("click", () => {
-  if (!sw.isRunning) {
-    sw.start();
-    swf.watch();
-    swStartStopBtn.innerText = "STOP";
-  } else {
-    sw.stop();
-    swf.unwatch();
-    swStartStopBtn.innerText = "START";
-  }
-});
-
-swResetBtn.addEventListener("click", () => {
-  sw.reset();
-  swf.updateOnce();
-});
+swf.mount(swFace, swResetBtn, swStartStopBtn);
 
 // --------- TIMER ---------
 const minField = document.querySelector("#min-field") as HTMLInputElement;

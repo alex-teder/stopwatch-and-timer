@@ -28,8 +28,10 @@ export class Stopwatch {
 export class StopwatchFace {
   private readonly REFRESH_RATE_MS = 32;
   private intervalId: number | null = null;
-  private element: HTMLElement | null = null;
-  sw: Stopwatch;
+  private face: HTMLElement | null = null;
+  private resetBtn: HTMLButtonElement | null = null;
+  private startStopBtn: HTMLButtonElement | null = null;
+  private sw: Stopwatch;
 
   constructor(sw: Stopwatch) {
     this.sw = sw;
@@ -61,23 +63,42 @@ export class StopwatchFace {
     return [this.hours, this.minutes, this.seconds, this.hundredths].map(this.stringify).join(":");
   }
 
-  mount(el: HTMLElement) {
-    this.element = el;
-    this.element.innerText = this.value;
+  private updateChangesOnce() {
+    this.face!.innerText = this.value;
   }
 
-  updateOnce() {
-    this.element!.innerText = this.value;
-  }
-
-  watch() {
+  private watchChanges() {
     this.intervalId = setInterval(() => {
-      this.updateOnce();
+      this.updateChangesOnce();
     }, this.REFRESH_RATE_MS);
   }
 
-  unwatch() {
+  private unwatchChanges() {
     clearInterval(this.intervalId!);
     this.intervalId = null;
+  }
+
+  mount(face: HTMLElement, resetBtn: HTMLButtonElement, startStopBtn: HTMLButtonElement) {
+    this.face = face;
+    this.face.innerText = this.value;
+    this.resetBtn = resetBtn;
+    this.startStopBtn = startStopBtn;
+
+    this.startStopBtn.addEventListener("click", () => {
+      if (!this.sw.isRunning) {
+        this.sw.start();
+        this.watchChanges();
+        this.startStopBtn!.innerText = "STOP";
+      } else {
+        this.sw.stop();
+        this.unwatchChanges();
+        this.startStopBtn!.innerText = "START";
+      }
+    });
+
+    this.resetBtn.addEventListener("click", () => {
+      this.sw.reset();
+      this.updateChangesOnce();
+    });
   }
 }
