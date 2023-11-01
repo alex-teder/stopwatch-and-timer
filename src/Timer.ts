@@ -18,7 +18,8 @@ export class Timer {
 
   start() {
     this.intervalId = setInterval(() => {
-      this.value -= 0.1;
+      const rounded = (this.value - 0.1).toFixed(1);
+      this.value = parseFloat(rounded);
     }, 100);
   }
 
