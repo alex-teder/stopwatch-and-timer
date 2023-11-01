@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="./vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stopwatch / Timer</title>
+  <script type="module" crossorigin src="./assets/index-e1c9dc49.js"></script>
+  <link rel="stylesheet" href="./assets/index-8c2b2304.css">
+</head>
+
+<body>
+  <div id="app">
+    <section class="container">
+      <h2>Stopwatch</h2>
+      <div class="face" id="sw-face">0:00:00:00</div>
+      <div class="controls">
+        <button id="sw-reset">RESET</button>
+        <button id="sw-startstop">START</button>
+      </div>
+    </section>
+    <section class="container">
+      <h2>Timer</h2>
+      <div class="face">
+        <input id="min-field" type="number" class="hide-spinners" value="00" maxlength="2"><span>m</span>
+        <input id="sec-field" type="number" class="hide-spinners" value="30" maxlength="2"><span>s</span>
+      </div>
+      <div class="controls">
+        <button id="timer-startstop">START</button>
+      </div>
+    </section>
+  </div>
+
+  
+</body>
+
+</html>
