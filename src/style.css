@@ -50,6 +50,10 @@ h6 {
   margin: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: midnightblue;
@@ -96,5 +100,10 @@ body {
 }
 
 .face input:focus {
-  outline: 1px solid rgba(240, 248, 255, 0.243);
+  outline: 1px solid aliceblue;
+}
+
+#sw-face {
+  text-align: left;
+  width: 265px;
 }
