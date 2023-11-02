@@ -1,5 +1,6 @@
 export class Timer {
   private intervalId: number | null = null;
+  /** An integer, 0.1 * 1s */
   private value = 0;
 
   constructor() {}
@@ -9,7 +10,7 @@ export class Timer {
   }
 
   getValue() {
-    return Math.ceil(this.value);
+    return this.value;
   }
 
   setValue(newValue: number) {
@@ -18,8 +19,7 @@ export class Timer {
 
   start() {
     this.intervalId = setInterval(() => {
-      const rounded = (this.value - 0.1).toFixed(1);
-      this.value = parseFloat(rounded);
+      this.value--;
     }, 100);
   }
 
@@ -42,10 +42,11 @@ export class TimerFace {
   }
 
   private toTimerValue(minutes: number, seconds: number) {
-    return minutes * 60 + seconds;
+    return (minutes * 60 + seconds) * 10;
   }
 
   private toReadable(value: number) {
+    value = Math.ceil(value / 10);
     const minutes = Math.floor(value / 60)
       .toString()
       .padStart(2, "0");

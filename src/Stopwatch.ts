@@ -1,6 +1,7 @@
 export class Stopwatch {
   private readonly PRECISION_MS = 10;
   private intervalId: number | null = null;
+  /** An integer 0.01 * 1s */
   value = 0;
 
   constructor() {}
@@ -59,17 +60,17 @@ export class StopwatchFace {
     return value.toString().padStart(2, "0");
   }
 
-  private get value() {
+  private get textValue() {
     return [this.hours, this.minutes, this.seconds, this.hundredths].map(this.stringify).join(":");
   }
 
-  private updateChangesOnce() {
-    this.face!.innerText = this.value;
+  private updateOnce() {
+    this.face!.innerText = this.textValue;
   }
 
   private watchChanges() {
     this.intervalId = setInterval(() => {
-      this.updateChangesOnce();
+      this.updateOnce();
     }, this.REFRESH_RATE_MS);
   }
 
@@ -80,9 +81,10 @@ export class StopwatchFace {
 
   mount(face: HTMLElement, resetBtn: HTMLButtonElement, startStopBtn: HTMLButtonElement) {
     this.face = face;
-    this.face.innerText = this.value;
     this.resetBtn = resetBtn;
     this.startStopBtn = startStopBtn;
+
+    this.updateOnce();
 
     this.startStopBtn.addEventListener("click", () => {
       if (!this.sw.isRunning) {
@@ -98,7 +100,7 @@ export class StopwatchFace {
 
     this.resetBtn.addEventListener("click", () => {
       this.sw.reset();
-      this.updateChangesOnce();
+      this.updateOnce();
     });
   }
 }
